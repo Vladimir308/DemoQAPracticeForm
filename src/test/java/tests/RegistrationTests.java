@@ -1,10 +1,7 @@
 package tests;
 
-import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
-
-import java.util.Arrays;
 
 public class RegistrationTests extends TestBase {
 
