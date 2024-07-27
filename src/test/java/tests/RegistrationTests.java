@@ -10,6 +10,7 @@ public class RegistrationTests extends TestBase {
     @Test
     void fillAllFieldsTest() {
         registrationPage.openPage()
+                .removeBanner()
                 .setFirstName("German")
                 .setLastName("Chernov")
                 .setEmail("Germannn@mail.ru")
@@ -36,8 +37,9 @@ public class RegistrationTests extends TestBase {
     }
 
     @Test
-    void fillRequiredFildsTest(){
+    void fillRequiredFildsTest() {
         registrationPage.openPage()
+                .removeBanner()
                 .setFirstName("Student")
                 .setLastName("Studentov")
                 .setEmail("Student@mail.com")
@@ -60,6 +62,7 @@ public class RegistrationTests extends TestBase {
     @Test
     void clickSubmitWithEmptyFields() {
         registrationPage.openPage()
+                .removeBanner()
                 .submit()
                 .checkRedFirstName()
                 .checkRedLastName()

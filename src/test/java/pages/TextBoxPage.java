@@ -1,61 +1,63 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.By;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-public final class TextBoxPage extends PageBase<TextBoxPage> {
-    private final SelenideElement
-            fullNameInput = $("#userName"),
-            emailInput = $("#userEmail"),
+public class TextBoxPage {
+
+    private final SelenideElement userNameInput = $("#userName"),
+            userEmailInput = $("#userEmail"),
             currentAddressInput = $("#currentAddress"),
             permanentAddressInput = $("#permanentAddress"),
-            resultBox = $("#output");
-    public final SelenideElement
-            nameResult = resultBox.$("#name"),
-            emailResult = resultBox.$("#email"),
-            currentAddressResult = resultBox.$("#currentAddress"),
-            permanentAddressResult = resultBox.$("#permanentAddress");
+            submitButton = $("#submit"),
+            outputTable = $("#output");
 
-    ButtonComponent submitButton;
-
-    public TextBoxPage() {
-        submitButton = new ButtonComponent();
-    }
 
     public TextBoxPage openPage() {
         open("/text-box");
+
         return this;
     }
 
-    public TextBoxPage setFullName(String name) {
-        fullNameInput.setValue(name);
+    public TextBoxPage setUserName(String value) {
+        userNameInput.setValue(value);
+
         return this;
     }
 
-    public TextBoxPage setEmail(String email) {
-        emailInput.setValue(email);
+    public TextBoxPage setUserEmail(String value) {
+        userEmailInput.setValue(value);
+
         return this;
     }
 
-    public TextBoxPage setCurrentAddress(String address) {
-        currentAddressInput.setValue(address);
+    public TextBoxPage setCurrentAddress(String value) {
+        currentAddressInput.setValue(value);
+
         return this;
     }
 
-    public TextBoxPage setPermanentAddress(String address) {
-        permanentAddressInput.setValue(address);
+    public TextBoxPage setPermanentAddress(String value) {
+        permanentAddressInput.setValue(value);
+
         return this;
     }
 
-    public TextBoxPage clickSubmitBtn() {
-        submitButton.click("#submit");
+    public TextBoxPage submit() {
+        submitButton.click();
+
         return this;
     }
 
-    public TextBoxPage checkResultBox(SelenideElement locatorId, String text) {
-        locatorId.shouldHave(text(text));
+    public TextBoxPage checkResult(String key, String value) {
+        outputTable.$(By.id(key)).shouldHave(text(value));
+
         return this;
     }
+
+
 }
