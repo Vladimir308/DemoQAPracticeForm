@@ -1,72 +1,45 @@
 package tests;
 
 import org.junit.jupiter.api.Test;
-import pages.RegistrationPage;
+
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selenide.*;
 
 public class RegistrationTests extends TestBase {
 
-    RegistrationPage registrationPage = new RegistrationPage();
-
     @Test
-    void fillAllFieldsTest() {
-        registrationPage.openPage()
-                .removeBanner()
-                .setFirstName("German")
-                .setLastName("Chernov")
-                .setEmail("Germannn@mail.ru")
-                .setGender("Male")
-                .setUserNumber("9776932525")
-                .setDateOfBirth("11", "March", "1985")
-                .setSubject("Comp")
-                .setHobbies("Reading")
-                .uploadPicture("416280252.jpg")
-                .setUserAddress("Somewhere")
-                .setState("NCR")
-                .setCity("Noida")
-                .submit()
-                .checkResult("Student Name", "German")
-                .checkResult("Student Email", "Germannn@mail.ru")
-                .checkResult("Gender", "Male")
-                .checkResult("Mobile", "9776932525")
-                .checkResult("Date of Birth", "11 March,1985")
-                .checkResult("Subjects", "Comp")
-                .checkResult("Hobbies", "Reading")
-                .checkResult("Picture", "416280252.jpg")
-                .checkResult("Address", "Somewhere")
-                .checkResult("State and City", "NCR Noida");
+    void fillFormTest() {
+        open("/automation-practice-form");
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
+        $("#firstName").setValue("German");
+        $("#lastName").setValue("Chernov");
+        $("#userEmail").setValue("Germannn@mail.ru");
+        $("#userNumber").setValue("9776932525");
+        $("label[for='gender-radio-1']").click();
+        $("#dateOfBirthInput").click();
+        $(".react-datepicker__month-select").selectOption("March");
+        $(".react-datepicker__year-select").selectOption("1985");
+        $(".react-datepicker__day--011").click();
+        $("label[for='hobbies-checkbox-1']").click();
+        $("#uploadPicture").uploadFromClasspath("416280252.jpg");
+        $("#currentAddress").setValue("Somewhere");
+        $("#subjectsInput").click();
+        $("#subjectsInput").setValue("Comp").pressEnter();
+        $("#state").click();
+        $("#react-select-3-option-3").click();
+        $("#city").click();
+        $("#react-select-4-option-0").click();
+        $("#submit").click();
+        $(".table").shouldHave(text("Student Name German Chernov"));
+        $(".table").shouldHave(text("Student Email Germannn@mail.ru"));
+        $(".table").shouldHave(text("Gender Male"));
+        $(".table").shouldHave(text("Mobile 9776932525"));
+        $(".table").shouldHave(text("Date of Birth 11 March,1985"));
+        $(".table").shouldHave(text("Subjects Comp"));
+        $(".table").shouldHave(text("Hobbies Sports"));
+        $(".table").shouldHave(text("Picture 416280252.jpg"));
+        $(".table").shouldHave(text("Address Somewhere"));
+        $(".table").shouldHave(text("State and City Rajasthan Jaipur"));
     }
-
-    @Test
-    void fillRequiredFildsTest() {
-        registrationPage.openPage()
-                .removeBanner()
-                .setFirstName("Student")
-                .setLastName("Studentov")
-                .setEmail("Student@mail.com")
-                .setGender("Male")
-                .setUserNumber("8252652266")
-                .setDateOfBirth("15", "May", "1986")
-                .submit()
-                .checkResult("Student Name", "Student Studentov")
-                .checkResult("Student Email", "Student@mail.com")
-                .checkResult("Gender", "Male")
-                .checkResult("Mobile", "8252652266")
-                .checkResult("Date of Birth", "15 May,1986")
-                .checkResult("Subjects", " ")
-                .checkResult("Hobbies", " ")
-                .checkResult("Picture", " ")
-                .checkResult("Address", " ")
-                .checkResult("State and City", " ");
-    }
-
-    @Test
-    void clickSubmitWithEmptyFields() {
-        registrationPage.openPage()
-                .removeBanner()
-                .submit()
-                .checkRedFirstName()
-                .checkRedLastName()
-                .checkRedMobile();
-    }
-
 }
