@@ -37,6 +37,9 @@ dependencies {
             'io.qameta.allure:allure-selenide:2.28.1'
     )
 }
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
 
 test {
     useJUnitPlatform()
