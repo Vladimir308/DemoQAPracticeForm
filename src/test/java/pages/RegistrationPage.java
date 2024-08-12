@@ -27,7 +27,7 @@ public class RegistrationPage {
     CalendarComponents calendarComponents = new CalendarComponents();
     ResultTableComponents resultTableComponents = new ResultTableComponents();
 
-
+    @Step("Закрытие баннеров")
     public RegistrationPage removeBanner() {
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
@@ -39,89 +39,106 @@ public class RegistrationPage {
         open("/automation-practice-form");
         return this;
     }
+
     @Step("Ввести имя")
     public RegistrationPage setFirstName(String value) {
         firstNameInput.setValue(value);
         return this;
     }
+
     @Step("Ввести фамилию")
     public RegistrationPage setLastName(String value) {
         lastNameInput.setValue(value);
         return this;
     }
+
     @Step("Ввести электронную почту")
     public RegistrationPage setEmail(String value) {
         emailInput.setValue(value);
         return this;
     }
+
     @Step("Выбрать пол")
     public RegistrationPage setGender(String value) {
         genderWrapper.$(byText(value)).click();
         return this;
     }
+
     @Step("Ввести номер телефона")
     public RegistrationPage setUserNumber(String value) {
         numberInput.setValue(value);
         return this;
     }
+
     @Step("Выбрать дату рождения")
     public RegistrationPage setDateOfBirth(String day, String month, String year) {
         dateOfBirthInput.click();
         calendarComponents.setDate(day, month, year);
         return this;
     }
+
     @Step("Выбрать предмет")
     public RegistrationPage setSubject(String value) {
         subjectInput.setValue(value).pressEnter();
         return this;
     }
+
     @Step("Выбрать хобби")
     public RegistrationPage setHobbies(String hobby) {
         hobbiesWrapper.$(byText(hobby)).click();
         return this;
     }
+
     @Step("Загрузить фотографию")
     public RegistrationPage uploadPicture(String value) {
         userPicture.uploadFromClasspath(value);
         return this;
     }
+
     @Step("Ввести адрес")
     public RegistrationPage setUserAddress(String value) {
         addressInput.setValue(value);
         return this;
     }
+
     @Step("Выбрать штат")
     public RegistrationPage setState(String value) {
         stateCityWrapper.$(byText("Select State")).click();
         stateCityWrapper.$(byText(value)).click();
         return this;
     }
+
     @Step("Выбрать город")
     public RegistrationPage setCity(String value) {
         stateCityWrapper.$(byText("Select City")).click();
         stateCityWrapper.$(byText(value)).click();
         return this;
     }
+
     @Step("Кликнуть отправить")
     public RegistrationPage submit() {
         submitButton.click();
         return this;
     }
+
     @Step("Проверка результатов")
     public RegistrationPage checkResult(String key, String value) {
         resultTableComponents.checkResultsTableNotVisible(key, value);
         return this;
     }
+
     @Step("Проверка красного бордера")
     public RegistrationPage checkRedFirstName() {
         firstNameInput.shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
         return this;
     }
+
     @Step("Проверка красного бордера")
     public RegistrationPage checkRedLastName() {
         lastNameInput.shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
         return this;
     }
+
     @Step("Проверка красного бордера")
     public RegistrationPage checkRedMobile() {
         numberInput.shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
