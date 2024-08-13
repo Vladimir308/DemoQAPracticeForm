@@ -56,5 +56,4 @@ task regression_test(type: Test) {
     useJUnitPlatform {
         includeTags("regression")
     }
-
 }
