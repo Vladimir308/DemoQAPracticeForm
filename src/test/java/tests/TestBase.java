@@ -6,6 +6,7 @@ import helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Map;
@@ -19,10 +20,9 @@ public class TestBase {
         Configuration.browserSize = System.getProperty("browser_size","1920x1080");
         Configuration.browser = System.getProperty("browser", "chrome");
         Configuration.browserVersion = System.getProperty("version", "100.0");
-        Configuration.remote = System.getProperty("remote");
+        Configuration.remote = System.getProperty("remote", "https://user1:1234@selenoid.autotests.cloud/wd/hub");
         Configuration.pageLoadStrategy = "eager";
         Configuration.timeout = 30000;
-        SelenideLogger.addListener("allure", new AllureSelenide());
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
@@ -31,6 +31,10 @@ public class TestBase {
         Configuration.browserCapabilities = capabilities;
     }
 
+    @BeforeEach
+    void addListener() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+    }
     @AfterEach
     void tearDown() {
         Attach.screenshotAs("Last screenshot");
