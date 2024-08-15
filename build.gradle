@@ -54,3 +54,21 @@ task regression_test(type: Test) {
         includeTags("regression")
     }
 }
+
+task smoke_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("smoke")
+    }
+}
+
+task production_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("production")
+    }
+}
+
+task development_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("development")
+    }
+}
