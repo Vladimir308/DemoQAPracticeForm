@@ -27,35 +27,35 @@ public class TextBoxPage {
 
     @Step("Ввести имя")
     public TextBoxPage setUserName(String value) {
-        userNameInput.setValue(value);
+        userNameInput.scrollTo().setValue(value);
 
         return this;
     }
 
     @Step("Ввести электронную почту")
     public TextBoxPage setUserEmail(String value) {
-        userEmailInput.setValue(value);
+        userEmailInput.scrollTo().setValue(value);
 
         return this;
     }
 
     @Step("Ввести адрес")
     public TextBoxPage setCurrentAddress(String value) {
-        currentAddressInput.setValue(value);
+        currentAddressInput.scrollTo().setValue(value);
 
         return this;
     }
 
     @Step("Ввести адрес")
     public TextBoxPage setPermanentAddress(String value) {
-        permanentAddressInput.setValue(value);
+        permanentAddressInput.scrollTo().setValue(value);
 
         return this;
     }
 
     @Step("Кликнуть отправить")
     public TextBoxPage submit() {
-        submitButton.click();
+        submitButton.scrollTo().click();
 
         return this;
     }

@@ -42,50 +42,50 @@ public class RegistrationPage {
 
     @Step("Ввести имя")
     public RegistrationPage setFirstName(String value) {
-        firstNameInput.setValue(value);
+        firstNameInput.scrollTo().setValue(value);
         return this;
     }
 
     @Step("Ввести фамилию")
     public RegistrationPage setLastName(String value) {
-        lastNameInput.setValue(value);
+        lastNameInput.scrollTo().setValue(value);
         return this;
     }
 
     @Step("Ввести электронную почту")
     public RegistrationPage setEmail(String value) {
-        emailInput.setValue(value);
+        emailInput.scrollTo().setValue(value);
         return this;
     }
 
     @Step("Выбрать пол")
     public RegistrationPage setGender(String value) {
-        genderWrapper.$(byText(value)).click();
+        genderWrapper.$(byText(value)).scrollTo().click();
         return this;
     }
 
     @Step("Ввести номер телефона")
     public RegistrationPage setUserNumber(String value) {
-        numberInput.setValue(value);
+        numberInput.scrollTo().setValue(value);
         return this;
     }
 
     @Step("Выбрать дату рождения")
     public RegistrationPage setDateOfBirth(String day, String month, String year) {
-        dateOfBirthInput.click();
+        dateOfBirthInput.scrollTo().click();
         calendarComponents.setDate(day, month, year);
         return this;
     }
 
     @Step("Выбрать предмет")
     public RegistrationPage setSubject(String value) {
-        subjectInput.setValue(value).pressEnter();
+        subjectInput.scrollTo().setValue(value).pressEnter();
         return this;
     }
 
     @Step("Выбрать хобби")
     public RegistrationPage setHobbies(String hobby) {
-        hobbiesWrapper.$(byText(hobby)).click();
+        hobbiesWrapper.$(byText(hobby)).scrollTo().click();
         return this;
     }
 
@@ -97,27 +97,27 @@ public class RegistrationPage {
 
     @Step("Ввести адрес")
     public RegistrationPage setUserAddress(String value) {
-        addressInput.setValue(value);
+        addressInput.scrollTo().setValue(value);
         return this;
     }
 
     @Step("Выбрать штат")
     public RegistrationPage setState(String value) {
-        stateCityWrapper.$(byText("Select State")).click();
-        stateCityWrapper.$(byText(value)).click();
+        stateCityWrapper.$(byText("Select State")).scrollTo().click();
+        stateCityWrapper.$(byText(value)).scrollTo().click();
         return this;
     }
 
     @Step("Выбрать город")
     public RegistrationPage setCity(String value) {
-        stateCityWrapper.$(byText("Select City")).click();
-        stateCityWrapper.$(byText(value)).click();
+        stateCityWrapper.$(byText("Select City")).scrollTo().click();
+        stateCityWrapper.$(byText(value)).scrollTo().click();
         return this;
     }
 
     @Step("Кликнуть отправить")
     public RegistrationPage submit() {
-        submitButton.click();
+        submitButton.scrollTo().click();
         return this;
     }
 
