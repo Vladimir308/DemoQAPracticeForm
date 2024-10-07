@@ -2,6 +2,11 @@ package config;
 
 import com.codeborne.selenide.Configuration;
 import org.aeonbits.owner.ConfigFactory;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+import java.util.Map;
+
+import static com.codeborne.selenide.Configuration.remote;
 
 public class WebDriverProvider {
 
@@ -27,7 +32,16 @@ public class WebDriverProvider {
 
         Configuration.baseUrl = config.getBaseUrl();
         Configuration.browserVersion = config.getBrowserVersion();
-        Configuration.remote = config.getRemoteUrl();
-        Configuration.browserSize = config.getBrowserSize();
+        remote = config.getRemoteUrl();
+        Configuration.pageLoadStrategy = "eager";
+        Configuration.pageLoadTimeout = 100000;
+        Configuration.timeout = 15000;
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                "enableVNC", true,
+                "enableVideo", true));
+
+        Configuration.browserCapabilities = capabilities;
     }
 }

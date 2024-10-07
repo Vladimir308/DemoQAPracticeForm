@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 @Tag("development")
-public class RegistrationPageTests extends TestBase {
+public class RegistrationPageTests extends BaseTest {
 
     @Test
     void fillAllFieldsTest() {

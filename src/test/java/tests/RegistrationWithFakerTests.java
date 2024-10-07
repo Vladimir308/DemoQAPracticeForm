@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 @Tag("regression")
-public class RegistrationWithFakerTests extends TestBase {
+public class RegistrationWithFakerTests extends BaseTest {
 
     @Test
     void fillAllFieldsTest() {

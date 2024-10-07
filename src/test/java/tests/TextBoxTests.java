@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 @Tag("production")
-public class TextBoxTests extends TestBase {
+public class TextBoxTests extends BaseTest {
 
     @Test
     void fillFormTest() {

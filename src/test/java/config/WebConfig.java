@@ -3,6 +3,7 @@ package config;
 import org.aeonbits.owner.Config;
 
 @Config.Sources({
+        "classpath:${env}.properties",
         "classpath:local.properties"
 })
 
@@ -19,6 +20,9 @@ public interface WebConfig extends Config {
     @Key("browserSize")
     String getBrowserSize();
 
-    @Key("remoteUrl")
+    @Key("remote")
     String getRemoteUrl();
+
+    @Key("videoUrl")
+    String getVideoUrl();
 }
