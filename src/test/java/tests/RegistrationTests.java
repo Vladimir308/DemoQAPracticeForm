@@ -7,7 +7,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
 @Tag("smoke")
-public class RegistrationTests extends TestBase {
+public class RegistrationTests extends BaseTest {
 
     @Test
     void fillFormTest() {

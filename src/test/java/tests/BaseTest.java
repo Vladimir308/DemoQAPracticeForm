@@ -2,55 +2,48 @@ package tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import config.WebDriverProvider;
 import helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import pages.RegistrationPage;
-import pages.TextBoxPage;
-import utils.Users;
 
 import java.util.Map;
 
 import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 
-public class TestBase {
-
-    TextBoxPage textBoxPage = new TextBoxPage();
-    RegistrationPage registrationPage = new RegistrationPage();
-    Users user = new Users();
-
+public class BaseTest {
     @BeforeAll
-    public static void setUp() {
-        SelenideLogger.addListener("allure", new AllureSelenide());
-        Configuration.baseUrl = System.getProperty("baseUrl", "https://demoqa.com");
-        Configuration.browserSize = System.getProperty("browser_size", "1920x1080");
-        Configuration.browser = System.getProperty("browser", "chrome");
-        Configuration.browserVersion = System.getProperty("version", "126.0");
-        Configuration.remote = System.getProperty("remote", "https://user1:1234@selenoid.autotests.cloud/wd/hub");
+    static void beforeAll() {
         Configuration.pageLoadStrategy = "eager";
-        Configuration.timeout = 30000;
+        Configuration.pageLoadTimeout = 100000;
+        Configuration.timeout = 15000;
+
+        WebDriverProvider provider = new WebDriverProvider() {
+        };
+
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
-                "enableVideo", true
-        ));
+                "enableVideo", true));
+
         Configuration.browserCapabilities = capabilities;
     }
 
     @BeforeEach
     void addListener() {
-        SelenideLogger.addListener("allure", new AllureSelenide());
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     }
 
     @AfterEach
-    void tearDown() {
+    void afterEach() {
         Attach.screenshotAs("Last screenshot");
         Attach.pageSource();
         Attach.browserConsoleLogs();
         Attach.addVideo();
         closeWebDriver();
+
     }
 }

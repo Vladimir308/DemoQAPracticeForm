@@ -2,12 +2,9 @@ package tests;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import pages.TextBoxPage;
 
 @Tag("production")
 public class TextBoxTests extends TestBase {
-
-    TextBoxPage textBoxPage = new TextBoxPage();
 
     @Test
     void fillFormTest() {

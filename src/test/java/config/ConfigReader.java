@@ -1,18 +1,17 @@
 package config;
 
-import config.WebConfig;
 import org.aeonbits.owner.ConfigFactory;
 
 public enum ConfigReader {
-    Instance;
+    INSTANCE;
 
-    private static final WebConfig webConfig =
+    private static final WebConfig webDriverConfig =
             ConfigFactory.create(
                     WebConfig.class,
                     System.getProperties()
             );
 
     public WebConfig read() {
-        return webConfig;
+        return webDriverConfig;
     }
 }
