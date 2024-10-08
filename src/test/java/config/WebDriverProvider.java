@@ -18,30 +18,35 @@ public class WebDriverProvider {
     }
 
     private void createWebDriver() {
+        Configuration.baseUrl = config.getBaseUrl();
         switch (config.getBrowserName().toLowerCase()) {
-            case "chrome":
+            case "chrome": {
                 Configuration.browser = "chrome";
                 break;
-            case "firefox":
+            }
+            case "firefox": {
                 Configuration.browser = "firefox";
                 break;
+            }
             default:
-                throw new RuntimeException(config.getBrowserName());
+                throw new RuntimeException("No such driver: + " + config.getBrowserName());
         }
-
 
         Configuration.baseUrl = config.getBaseUrl();
         Configuration.browserVersion = config.getBrowserVersion();
-        remote = config.getRemoteUrl();
-        Configuration.pageLoadStrategy = "eager";
-        Configuration.pageLoadTimeout = 100000;
-        Configuration.timeout = 15000;
+        String remoteUrl = config.getRemoteUrl();
+        if (remoteUrl != null) {
+            remote = remoteUrl;
+            Configuration.pageLoadStrategy = "eager";
+            Configuration.pageLoadTimeout = 100000;
+            Configuration.timeout = 15000;
 
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
-                "enableVNC", true,
-                "enableVideo", true));
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                    "enableVNC", true,
+                    "enableVideo", true));
 
-        Configuration.browserCapabilities = capabilities;
+            Configuration.browserCapabilities = capabilities;
+        }
     }
 }
